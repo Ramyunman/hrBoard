@@ -1,6 +1,8 @@
 package com.nexacro.hrBoard.impl;
 
 import java.util.List;
+
+
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -19,7 +21,7 @@ import com.nexacro.java.xapi.data.DataSet;
  * @title
  * @desc 아래의 예제는 샘플용으로 작성된 코드로 참고용으로만 사용하시기 바랍니다. - UidapterBoardServiceImpl
  *       Sample Class
- * @package com.nexacro.hrBoard.impl
+ * @package com.nexacro.orderBoard.impl
  * 
  *          <pre>
  * 
@@ -86,5 +88,13 @@ public class UidapterBoardServiceImpl implements UidapterBoardService {
 				mapper.delete_board_map(board);
 			}
 		}
+	}
+	
+	
+	@Override
+	public int selectUserCount() {
+		UiadapterBoardMapper mapper = sqlSession.getMapper(UiadapterBoardMapper.class);
+		
+		return mapper.selectUserCount();
 	}
 }

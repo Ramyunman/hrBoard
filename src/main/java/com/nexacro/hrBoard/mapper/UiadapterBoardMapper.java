@@ -1,6 +1,7 @@
 package com.nexacro.hrBoard.mapper;
 
 import java.util.List;
+
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -12,7 +13,7 @@ import com.nexacro.hrBoard.object.Board;
  * 
  * @title
  * @desc 아래의 예제는 샘플용으로 작성된 코드로 참고용으로만 사용하시기 바랍니다. -
- * @package com.nexacro.hrBoard.mapper
+ * @package com.nexacro.orderBoard.mapper
  * 
  *          <pre>
  * 
@@ -40,4 +41,6 @@ public interface UiadapterBoardMapper {
 	public void update_board_map(Map<String, Object> board);
 
 	public void delete_board_map(Map<String, Object> board);
+	
+	public int selectUserCount();
 }

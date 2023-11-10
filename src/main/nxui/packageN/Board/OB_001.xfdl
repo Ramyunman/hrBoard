@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="OB_001" width="1280" height="720" titletext="New Form">
+    <Layouts>
+      <Layout height="720" width="1280">
+        <Static id="sta01" taborder="1" left="131" top="68" width="1019" height="70" onclick="sta01_onclick" border="1px solid darkgray, 0px none"/>
+        <Static id="sta00" taborder="0" text="인사관리시스템" left="130" top="10" width="200" height="46" font="28px/normal &quot;Gulim&quot;"/>
+        <Static id="btn_empList" taborder="2" text="사원목록" left="145" top="80" width="71" height="43" font="16px/normal &quot;Gulim&quot;" color="dodgerblue" onclick="btn_empList_onclick"/>
+        <Edit id="edt_Nm" taborder="3" left="620" top="154" width="210" height="42" onchanged="edt_Name_onchanged" displaynulltext="성명"/>
+        <Button id="btn_searchNm" taborder="4" text="검색" left="840" top="154" width="50" height="42" onclick="btn_searchNm_onclick"/>
+        <Grid id="grd_empList" taborder="5" left="141" top="224" width="993" height="475">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="76"/>
+                <Column size="111"/>
+                <Column size="84"/>
+                <Column size="174"/>
+                <Column size="92"/>
+                <Column size="70"/>
+                <Column size="109"/>
+                <Column size="116"/>
+                <Column size="159"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="선택"/>
+                <Cell col="1" text="사원번호"/>
+                <Cell col="2" text="성명"/>
+                <Cell col="3" text="주민번호"/>
+                <Cell col="4" text="부서명"/>
+                <Cell col="5" text="직위"/>
+                <Cell col="6" text="입사일"/>
+                <Cell col="7" text="퇴사일"/>
+                <Cell col="8" text="Email"/>
+              </Band>
+              <Band id="body">
+                <Cell/>
+                <Cell col="1"/>
+                <Cell col="2"/>
+                <Cell col="3"/>
+                <Cell col="4"/>
+                <Cell col="5"/>
+                <Cell col="6"/>
+                <Cell col="7"/>
+                <Cell col="8"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.btn_empList_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	
+};
+
+this.btn_searchNm_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	
+};
+]]></Script>
+    <Objects>
+      <Dataset id="ds00"/>
+    </Objects>
+  </Form>
+</FDL>

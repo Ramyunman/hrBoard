@@ -17,23 +17,13 @@
             }
             
             // Object(Dataset, ExcelExportObject) Initialize
-            obj = new Dataset("emp_deptStatCombo", this);
+            obj = new Dataset("emp_deptCombo", this);
             obj._setContents("<ColumnInfo><Column id=\"department_id\" type=\"STRING\" size=\"256\"/><Column id=\"department_name\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
             this.addChild(obj.name, obj);
 
 
-            obj = new Dataset("emp_bankStatCombo", this);
-            obj._setContents("<ColumnInfo><Column id=\"bank_id\" type=\"STRING\" size=\"256\"/><Column id=\"bank_name\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
-            this.addChild(obj.name, obj);
-
-
-            obj = new Dataset("emp_deptCombo", this);
-            obj._setContents("<ColumnInfo><Column id=\"department_id\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
-            this.addChild(obj.name, obj);
-
-
             obj = new Dataset("emp_bankCombo", this);
-            obj._setContents("<ColumnInfo><Column id=\"bank_id\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            obj._setContents("<ColumnInfo><Column id=\"bank_id\" type=\"STRING\" size=\"256\"/><Column id=\"bank_name\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
@@ -111,7 +101,7 @@
             obj.set_codecolumn("department_id");
             obj.set_datacolumn("department_name");
             obj.set_displaynulltext("선택");
-            obj.set_innerdataset("emp_deptStatCombo");
+            obj.set_innerdataset("emp_deptCombo");
             obj.set_text("선택");
             obj.set_value("");
             obj.set_index("-1");
@@ -142,7 +132,7 @@
             obj.set_codecolumn("bank_id");
             obj.set_datacolumn("bank_name");
             obj.set_displaynulltext("선택");
-            obj.set_innerdataset("emp_bankStatCombo");
+            obj.set_innerdataset("emp_bankCombo");
             obj.set_text("선택");
             obj.set_value("");
             obj.set_index("-1");

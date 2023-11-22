@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="2.1">
+  <Form id="OB_001_01" width="1280" height="720" titletext="직원등록1" onload="OB_001_01_onload">
+    <Layouts>
+      <Layout height="720" width="1280">
+        <Static id="sta01" taborder="1" left="116" top="60" width="1019" height="70" onclick="sta01_onclick" border="1px solid darkgray, 0px none"/>
+        <Static id="btn_empList" taborder="0" text="사원목록" left="126" top="70" width="71" height="43" font="16px/normal &quot;Gulim&quot;" color="dodgerblue" onclick="btn_empList_onclick"/>
+        <Static id="sta00" taborder="2" text="인사관리시스템" left="116" top="6" width="200" height="46" font="28px/normal &quot;Gulim&quot;"/>
+        <Static id="sta02" taborder="3" text="성명" left="125" top="121" width="55" height="53" font="16px/normal &quot;Gulim&quot;"/>
+        <Static id="sta02_00" taborder="4" text="주민번호" left="372" top="121" width="76" height="53" font="16px/normal &quot;Gulim&quot;" onclick="sta02_00_onclick"/>
+        <Edit id="edt_Name" taborder="5" left="123" top="167" width="188" height="34" onchanged="edt_Name_onchanged" displaynulltext="성명"/>
+        <Edit id="edt_RegNo" taborder="6" left="370" top="167" width="201" height="34" onchanged="edt_Name_onchanged" displaynulltext="주민번호"/>
+        <Static id="sta02_01" taborder="7" text="주소" left="127" top="191" width="55" height="53" font="16px/normal &quot;Gulim&quot;"/>
+        <Edit id="edt_Address" taborder="8" left="125" top="235" width="448" height="100" onchanged="edt_Name_onchanged" displaynulltext="주소"/>
+        <Static id="sta02_02" taborder="9" text="입사일" left="133" top="328" width="55" height="53" font="16px/normal &quot;Gulim&quot;"/>
+        <Static id="sta02_02_00" taborder="10" text="부서명" left="286" top="327" width="55" height="53" font="16px/normal &quot;Gulim&quot;" onclick="sta02_02_00_onclick"/>
+        <Static id="sta02_02_01" taborder="11" text="퇴사일" left="447" top="326" width="55" height="53" font="16px/normal &quot;Gulim&quot;"/>
+        <Combo id="cbo_dptName" taborder="12" text="선택" left="286" top="377" width="128" height="40" value="" index="-1" codecolumn="department_id" datacolumn="department_name" displaynulltext="선택" onitemchanged="cbo_dptName_onitemchanged" innerdataset="emp_deptStatCombo"/>
+        <Calendar id="cal_hireDate" taborder="13" left="124" top="377" width="134" height="40" onchanged="cal00_onchanged"/>
+        <Calendar id="cal_leaveDate" taborder="14" left="444" top="377" width="134" height="40" onchanged="cal00_onchanged"/>
+        <Static id="sta02_02_02" taborder="15" text="급여은행" left="129" top="414" width="81" height="53" font="16px/normal &quot;Gulim&quot;"/>
+        <Static id="sta02_02_02_00" taborder="16" text="급여계좌" left="289" top="414" width="81" height="53" font="16px/normal &quot;Gulim&quot;"/>
+        <Combo id="cbo_bankName" taborder="17" text="선택" left="127" top="463" width="128" height="40" value="" index="-1" codecolumn="bank_id" datacolumn="bank_name" displaynulltext="선택" innerdataset="emp_bankStatCombo"/>
+        <Edit id="edt_Name00" taborder="18" left="290" top="462" width="288" height="41" onchanged="edt_Name_onchanged" displaynulltext="급여계좌"/>
+        <Static id="sta02_02_02_00_00" taborder="19" text="전화번호" left="128" top="495" width="81" height="53" font="16px/normal &quot;Gulim&quot;"/>
+        <Edit id="edt_Name00_00" taborder="20" left="128" top="543" width="449" height="41" onchanged="edt_Name_onchanged" displaynulltext="전화번호"/>
+        <Edit id="edt_Name00_00_00" taborder="21" left="128" top="622" width="449" height="41" onchanged="edt_Name_onchanged" displaynulltext="Email"/>
+        <Static id="sta02_02_02_00_00_00" taborder="22" text="Email" left="129" top="575" width="81" height="53" font="16px/normal &quot;Gulim&quot;"/>
+        <Button id="btn00" taborder="23" text="저장" left="129" top="679" width="68" height="32" color="floralwhite" background="black" onclick="btn00_onclick"/>
+      </Layout>
+    </Layouts>
+    <Script type="xscript5.1"><![CDATA[
+this.OB_001_01_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
+{
+	//alert("onload 함수 실행");
+	
+	//OB_001.xfdl이 화면에 로드될 때 검색 조건의 코보박스를 초기화 시켜준다.
+	//서버에 요청을 하기 전에 서버로 전달해줘야할 인자값은 뭐가 있을지 생각한다.
+	
+};
+
+this.btn_empList_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
+{
+	alert("사원 목록 실행");
+};
+
+this.btn00_onclick = function(obj:nexacro.Button,e:nexacro.ClickEventInfo)
+{
+	alert("직원 정보 저장");
+};
+
+this.cbo_dptName_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChangeEventInfo)
+{
+	
+};
+]]></Script>
+    <Objects>
+      <Dataset id="emp_deptStatCombo">
+        <ColumnInfo>
+          <Column id="department_id" type="STRING" size="256"/>
+          <Column id="department_name" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="emp_bankStatCombo">
+        <ColumnInfo>
+          <Column id="bank_id" type="STRING" size="256"/>
+          <Column id="bank_name" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="emp_deptCombo">
+        <ColumnInfo>
+          <Column id="department_id" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="emp_bankCombo">
+        <ColumnInfo>
+          <Column id="bank_id" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

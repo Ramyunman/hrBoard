@@ -237,6 +237,11 @@
         						 strArg    ,
         						 callBackFnc );  // 세팅한 값을 담아 서버로 데이터 전송
 
+        	// 부서명
+        	this.fn_setDeptNmCbo();
+
+        	// 은행
+        	this.fn_setBankNmCbo();
         };
 
         this.btn_empList_onclick = function(obj,e)

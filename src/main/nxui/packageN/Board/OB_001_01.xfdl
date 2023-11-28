@@ -65,7 +65,12 @@ this.OB_001_01_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 						 outData   ,
 						 strArg    ,
 						 callBackFnc );  // 세팅한 값을 담아 서버로 데이터 전송
-						 	
+	
+	// 부서명
+	this.fn_setDeptNmCbo();
+	
+	// 은행
+	this.fn_setBankNmCbo();
 };
 
 this.btn_empList_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)

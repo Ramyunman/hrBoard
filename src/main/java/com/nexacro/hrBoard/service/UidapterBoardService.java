@@ -1,5 +1,6 @@
 package com.nexacro.hrBoard.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import java.util.Map;
@@ -33,4 +34,8 @@ public interface UidapterBoardService {
 	void update_datalist_map(List<Map<String, Object>> boardList);
 	
 	int selectUserCount();
+
+	ArrayList<Map<String, Object>> selectDepartmentCode(Map<String, Object> emp_search);
+
+	
 }

@@ -4,6 +4,11 @@
 
 <mapper namespace="com.nexacro.hrBoard.mapper.UiadapterBoardMapper">
 	
+	<select id="selectDepartmentCode" parameterType="java.util.Map" resultType="java.util.Map">
+		 SELECT DEPARTMENT_ID,
+		 		DEPARTMENT_NAME 
+		 FROM DEPARTMENTS	
+	</select>
     <!--  POJO -->
      <select id="retrieve_datalist" parameterType="com.nexacro.hrBoard.object.Board" resultType="com.nexacro.hrBoard.object.Board">
             select title 

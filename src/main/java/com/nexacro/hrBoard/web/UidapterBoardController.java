@@ -2,6 +2,7 @@ package com.nexacro.hrBoard.web;
 
 import java.util.HashMap;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -50,6 +51,18 @@ public class UidapterBoardController {
 
 	@Autowired(required = true)
 	private UidapterBoardService uidapterSampleService;
+	
+	@RequestMapping(value = "/hrBoard/selectDepartmentCode.do")		// 부서 선택 콤보 박스
+	public NexacroResult selectDepartmentCode(@ParamDataSet(name = "emp_search") Map<String,Object> emp_search) throws NexacroException {
+		
+		NexacroResult result = new NexacroResult();	// return 값을 세팅하기 위한 객체 생성
+		ArrayList<Map<String,Object>> emp_departmentCode = new ArrayList<Map<String,Object>>();	// return 값 emp_deptStatCombo 객체 생성
+		
+		emp_departmentCode = uidapterSampleService.selectDepartmentCode(emp_search);	// 요청 처리를 Service로 이관
+																						// Service로 부터 받아온 결과 값을 emp_departmentCode에 삽입
+		result.addDataSet("emp_departmentCode", emp_departmentCode);	// return 값 세팅
+		return result;	// 회신
+	}
 	
 	
 	@RequestMapping(value = "/hrBoard/healthCheck.do")

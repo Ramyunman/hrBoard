@@ -1,5 +1,6 @@
 package com.nexacro.hrBoard.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import java.util.Map;
@@ -43,4 +44,6 @@ public interface UiadapterBoardMapper {
 	public void delete_board_map(Map<String, Object> board);
 	
 	public int selectUserCount();
+
+	public ArrayList<Map<String, Object>> selectDepartmentCode(Map<String, Object> emp_search);
 }

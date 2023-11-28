@@ -1,5 +1,6 @@
 package com.nexacro.hrBoard.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -96,5 +97,11 @@ public class UidapterBoardServiceImpl implements UidapterBoardService {
 		UiadapterBoardMapper mapper = sqlSession.getMapper(UiadapterBoardMapper.class);
 		
 		return mapper.selectUserCount();
+	}
+
+	@Override
+	public ArrayList<Map<String, Object>> selectDepartmentCode(Map<String, Object> emp_search) {
+		UiadapterBoardMapper mapper = sqlSession.getMapper(UiadapterBoardMapper.class);
+		return mapper.selectDepartmentCode(emp_search);
 	}
 }

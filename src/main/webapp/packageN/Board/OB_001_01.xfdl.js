@@ -17,13 +17,18 @@
             }
             
             // Object(Dataset, ExcelExportObject) Initialize
-            obj = new Dataset("emp_deptCombo", this);
-            obj._setContents("<ColumnInfo><Column id=\"department_id\" type=\"STRING\" size=\"256\"/><Column id=\"department_name\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            obj = new Dataset("emp_deptStatCombo", this);
+            obj._setContents("<ColumnInfo><Column id=\"DEPARTMENT_ID\" type=\"STRING\" size=\"256\"/><Column id=\"DEPARTMENT_NAME\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
             this.addChild(obj.name, obj);
 
 
             obj = new Dataset("emp_bankCombo", this);
             obj._setContents("<ColumnInfo><Column id=\"bank_id\" type=\"STRING\" size=\"256\"/><Column id=\"bank_name\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+
+            obj = new Dataset("emp_searchCombo", this);
+            obj._setContents("<ColumnInfo><Column id=\"DEPARTMENT_ID\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
             this.addChild(obj.name, obj);
             
             // UI Components Initialize
@@ -98,10 +103,10 @@
 
             obj = new Combo("cbo_dptName","286","377","128","40",null,null,null,null,null,null,this);
             obj.set_taborder("12");
-            obj.set_codecolumn("department_id");
-            obj.set_datacolumn("department_name");
             obj.set_displaynulltext("선택");
-            obj.set_innerdataset("emp_deptCombo");
+            obj.set_innerdataset("emp_deptStatCombo");
+            obj.set_codecolumn("DEPARTMENT_ID");
+            obj.set_datacolumn("DEPARTMENT_NAME");
             obj.set_text("선택");
             obj.set_value("");
             obj.set_index("-1");
@@ -195,9 +200,36 @@
         {
         	//alert("onload 함수 실행");
 
-        	//OB_001.xfdl이 화면에 로드될 때 검색 조건의 코보박스를 초기화 시켜준다.
+        	//OB_001.xfdl이 화면에 로드될 때 검색 조건의 콤보박스를 초기화 시켜준다.
         	//서버에 요청을 하기 전에 서버로 전달해줘야할 인자값은 뭐가 있을지 생각한다.
 
+        	//cbo_dptName 데이터셋을 생성하고 서버로 전달할 인자값을 추가해보자.
+        	this.emp_searchCombo.clearData();	// 데이터셋 초기화
+        	this.emp_searchCombo.addRow();		// 데이터셋에 값을 세팅하기 위해 1줄의 ROW를 추가
+        	this.emp_searchCombo.setColumn(0,"DEPARTMENT_ID");	// 추가된 0번째 ROW의 DEPARTMENT_ID 컬럼 세팅
+
+        	// 서버로 데이터를 전송한다.
+        	// 서버로 데이터를 전송하기 전 필요한 값들을 세팅한다.
+        	var strSvcId	= "selectDepartmentCode";						// 넥사크로에서 transaction을 구분하기 위한 id값, 이 id는 차후 fnCallBack 함수에서 쓰인다.
+        	var strSvcUrl	= "selectDepartmentCode.do";					// Java Controller에서 이 주소를 식별하여 요청을 처리한다.
+        	var inData		= "emp_search = emp_searchCombo";				// 서버로 전송할 데이터셋 세팅 = 문자 기준 왼쪽이 서버 오른쪽이 프론트 데이터셋.
+        																	// 프론트의 emp_searchCombo를 서버의 emp_search 값에 대입하겠다는 의미이다.
+        																	// 서버측(.java)에도 = 기준 왼쪽 데이터셋명(emp_search)과 반드시! 동일하게 명명해야 한다.
+        	var outData		= "emp_deptStatCombo = emp_departmentCode";		// 서버로부터 값을 전달받을 데이터셋 세팅
+        																	// 위와는 반대로 문자 기준 왼쪽이 프론트 오른쪽이 서버 데이터셋이다.
+        																	// 서버의 emp_departmentCode 서버의 emp_deptStatCombo로 값을 대입하겠다는 의미이다.
+        																	// 서버측(.java)에도 = 기준 오른쪽 데이터셋명(emp_departmentCode)과 반드시! 동일하게 명명해야 한다.
+        	var strArg		= "";											// 데이터셋이 아닌 값을 보낼때 쓰는 필드지만 데이터셋을 쓰는걸로 통일하자.
+        	var callBackFnc	= "fnCallback";	// 프레임웍 사이클의 9번에 해당한다. 서버로부터 값을 받은 이후 프론트에서 이행해야할 작업코드를
+        									// fnCallback 함수에서 작성한다.
+
+        	// 넥사크로 N에서 제공하는 서버로 요청하는 공통함수를 쓴다.
+        	this.gfnTransaction( strSvcId  ,
+        						 strSvcUrl ,
+        						 inData	   ,
+        						 outData   ,
+        						 strArg    ,
+        						 callBackFnc );  // 세팅한 값을 담아 서버로 데이터 전송
         };
 
         this.btn_empList_onclick = function(obj,e)

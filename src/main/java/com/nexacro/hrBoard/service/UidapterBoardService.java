@@ -35,7 +35,6 @@ public interface UidapterBoardService {
 	
 	int selectUserCount();
 
-	ArrayList<Map<String, Object>> selectDepartmentCode(Map<String, Object> emp_search);
+	ArrayList<Map<String, Object>> selectDepartmentCode(Map<String, Object> dpt_search);
 
-	
 }

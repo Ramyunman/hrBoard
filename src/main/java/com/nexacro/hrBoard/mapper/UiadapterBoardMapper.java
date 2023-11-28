@@ -45,5 +45,6 @@ public interface UiadapterBoardMapper {
 	
 	public int selectUserCount();
 
-	public ArrayList<Map<String, Object>> selectDepartmentCode(Map<String, Object> emp_search);
+	public ArrayList<Map<String, Object>> selectDepartmentCode(Map<String, Object> dpt_search);
+
 }

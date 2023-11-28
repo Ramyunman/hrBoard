@@ -100,8 +100,10 @@ public class UidapterBoardServiceImpl implements UidapterBoardService {
 	}
 
 	@Override
-	public ArrayList<Map<String, Object>> selectDepartmentCode(Map<String, Object> emp_search) {
+	public ArrayList<Map<String, Object>> selectDepartmentCode(Map<String, Object> dpt_search) {
 		UiadapterBoardMapper mapper = sqlSession.getMapper(UiadapterBoardMapper.class);
-		return mapper.selectDepartmentCode(emp_search);
+		return mapper.selectDepartmentCode(dpt_search);
 	}
+
+
 }

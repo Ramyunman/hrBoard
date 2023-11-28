@@ -4,6 +4,7 @@
 
 <mapper namespace="com.nexacro.hrBoard.mapper.UiadapterBoardMapper">
 	
+	
 	<select id="selectDepartmentCode" parameterType="java.util.Map" resultType="java.util.Map">
 		 SELECT DEPARTMENT_ID,
 		 		DEPARTMENT_NAME 

@@ -15,12 +15,12 @@
         <Static id="sta02_02" taborder="9" text="입사일" left="133" top="328" width="55" height="53" font="16px/normal &quot;Gulim&quot;"/>
         <Static id="sta02_02_00" taborder="10" text="부서명" left="286" top="327" width="55" height="53" font="16px/normal &quot;Gulim&quot;" onclick="sta02_02_00_onclick"/>
         <Static id="sta02_02_01" taborder="11" text="퇴사일" left="447" top="326" width="55" height="53" font="16px/normal &quot;Gulim&quot;"/>
-        <Combo id="cbo_dptName" taborder="12" text="선택" left="286" top="377" width="128" height="40" value="" index="-1" displaynulltext="선택" onitemchanged="cbo_dptName_onitemchanged" innerdataset="emp_deptStatCombo" codecolumn="DEPARTMENT_ID" datacolumn="DEPARTMENT_NAME"/>
+        <Combo id="cbo_dptName" taborder="12" text="선택" left="286" top="377" width="128" height="40" value="" index="-1" displaynulltext="선택" onitemchanged="cbo_dptName_onitemchanged" innerdataset="dpt_NameCombo" codecolumn="DEPARTMENT_ID" datacolumn="DEPARTMENT_NAME"/>
         <Calendar id="cal_hireDate" taborder="13" left="124" top="377" width="134" height="40" onchanged="cal00_onchanged"/>
         <Calendar id="cal_leaveDate" taborder="14" left="444" top="377" width="134" height="40" onchanged="cal00_onchanged"/>
         <Static id="sta02_02_02" taborder="15" text="급여은행" left="129" top="414" width="81" height="53" font="16px/normal &quot;Gulim&quot;"/>
         <Static id="sta02_02_02_00" taborder="16" text="급여계좌" left="289" top="414" width="81" height="53" font="16px/normal &quot;Gulim&quot;"/>
-        <Combo id="cbo_bankName" taborder="17" text="선택" left="127" top="463" width="128" height="40" value="" index="-1" codecolumn="bank_id" datacolumn="bank_name" displaynulltext="선택" innerdataset="emp_bankCombo"/>
+        <Combo id="cbo_bankName" taborder="17" text="선택" left="127" top="463" width="128" height="40" value="" index="-1" codecolumn="BANK_ID" datacolumn="BANK_NAME" displaynulltext="선택" innerdataset="bank_NameCombo" onitemchanged="cbo_bankName_onitemchanged"/>
         <Edit id="edt_Name00" taborder="18" left="290" top="462" width="288" height="41" onchanged="edt_Name_onchanged" displaynulltext="급여계좌"/>
         <Static id="sta02_02_02_00_00" taborder="19" text="전화번호" left="128" top="495" width="81" height="53" font="16px/normal &quot;Gulim&quot;"/>
         <Edit id="edt_Name00_00" taborder="20" left="128" top="543" width="449" height="41" onchanged="edt_Name_onchanged" displaynulltext="전화번호"/>
@@ -37,19 +37,20 @@ this.OB_001_01_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 	//OB_001.xfdl이 화면에 로드될 때 검색 조건의 콤보박스를 초기화 시켜준다.
 	//서버에 요청을 하기 전에 서버로 전달해줘야할 인자값은 뭐가 있을지 생각한다.
 	
+	// 부서명 콤보박스 설정
 	//cbo_dptName 데이터셋을 생성하고 서버로 전달할 인자값을 추가해보자.
-	this.emp_searchCombo.clearData();	// 데이터셋 초기화
-	this.emp_searchCombo.addRow();		// 데이터셋에 값을 세팅하기 위해 1줄의 ROW를 추가
-	this.emp_searchCombo.setColumn(0,"DEPARTMENT_ID");	// 추가된 0번째 ROW의 DEPARTMENT_ID 컬럼 세팅
+	this.dpt_searchCombo.clearData();	// 데이터셋 초기화
+	this.dpt_searchCombo.addRow();		// 데이터셋에 값을 세팅하기 위해 1줄의 ROW를 추가
+	this.dpt_searchCombo.setColumn(0,"DEPARTMENT_ID");	// 추가된 0번째 ROW의 DEPARTMENT_ID 컬럼 세팅
 	
 	// 서버로 데이터를 전송한다.
 	// 서버로 데이터를 전송하기 전 필요한 값들을 세팅한다.
 	var strSvcId	= "selectDepartmentCode";						// 넥사크로에서 transaction을 구분하기 위한 id값, 이 id는 차후 fnCallBack 함수에서 쓰인다. 
 	var strSvcUrl	= "selectDepartmentCode.do";					// Java Controller에서 이 주소를 식별하여 요청을 처리한다. 
-	var inData		= "emp_search = emp_searchCombo";				// 서버로 전송할 데이터셋 세팅 = 문자 기준 왼쪽이 서버 오른쪽이 프론트 데이터셋. 
+	var inData		= "dpt_search = dpt_searchCombo";				// 서버로 전송할 데이터셋 세팅 = 문자 기준 왼쪽이 서버 오른쪽이 프론트 데이터셋. 
 																	// 프론트의 emp_searchCombo를 서버의 emp_search 값에 대입하겠다는 의미이다.
 																	// 서버측(.java)에도 = 기준 왼쪽 데이터셋명(emp_search)과 반드시! 동일하게 명명해야 한다.
-	var outData		= "emp_deptStatCombo = emp_departmentCode";		// 서버로부터 값을 전달받을 데이터셋 세팅 
+	var outData		= "dpt_NameCombo = dpt_departmentCode";			// 서버로부터 값을 전달받을 데이터셋 세팅 
 																	// 위와는 반대로 문자 기준 왼쪽이 프론트 오른쪽이 서버 데이터셋이다.
 																	// 서버의 emp_departmentCode 서버의 emp_deptStatCombo로 값을 대입하겠다는 의미이다.
 																	// 서버측(.java)에도 = 기준 오른쪽 데이터셋명(emp_departmentCode)과 반드시! 동일하게 명명해야 한다.
@@ -64,6 +65,7 @@ this.OB_001_01_onload = function(obj:nexacro.Form,e:nexacro.LoadEventInfo)
 						 outData   ,
 						 strArg    ,
 						 callBackFnc );  // 세팅한 값을 담아 서버로 데이터 전송
+						 	
 };
 
 this.btn_empList_onclick = function(obj:nexacro.Static,e:nexacro.ClickEventInfo)
@@ -80,23 +82,30 @@ this.cbo_dptName_onitemchanged = function(obj:nexacro.Combo,e:nexacro.ItemChange
 {
 	
 };
+
+
 ]]></Script>
     <Objects>
-      <Dataset id="emp_deptStatCombo">
+      <Dataset id="dpt_NameCombo">
         <ColumnInfo>
           <Column id="DEPARTMENT_ID" type="STRING" size="256"/>
           <Column id="DEPARTMENT_NAME" type="STRING" size="256"/>
         </ColumnInfo>
       </Dataset>
-      <Dataset id="emp_bankCombo">
+      <Dataset id="bank_NameCombo">
         <ColumnInfo>
-          <Column id="bank_id" type="STRING" size="256"/>
-          <Column id="bank_name" type="STRING" size="256"/>
+          <Column id="BANK_ID" type="STRING" size="256"/>
+          <Column id="BANK_NAME" type="STRING" size="256"/>
         </ColumnInfo>
       </Dataset>
-      <Dataset id="emp_searchCombo">
+      <Dataset id="dpt_searchCombo">
         <ColumnInfo>
           <Column id="DEPARTMENT_ID" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="bank_searchCombo">
+        <ColumnInfo>
+          <Column id="BANK_ID" type="STRING" size="256"/>
         </ColumnInfo>
       </Dataset>
     </Objects>
